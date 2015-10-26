@@ -1,0 +1,19 @@
+.row
+  .col-md-4.col-md-offset-4
+    %h2 Log in
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      .form-group
+        = f.label :username, class: 'sr-only'
+        = f.text_field :username, autofocus: true, class: 'form-control', placeholder: 'Username'
+      .form-group
+        = f.label :password, class: 'sr-only'
+        = f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Password'
+      - if devise_mapping.rememberable?
+        .checkbox
+          
+          = f.label :remember_me, class: 'checkbox' do
+            = f.check_box :remember_me do
+              = 'Remember me'
+      .actions
+        = f.submit "Log in", class: 'btn btn-default'
+    = render "devise/shared/links"

@@ -1,0 +1,18 @@
+.row
+  .col-md-4.col-md-offset-4
+    = form_for @menu, url: {action: 'update'} do |f|
+      .form-group
+        = f.text_field :description, autofocus: true, class: 'form-control', placeholder: 'Description'
+      .form-group
+        .input-group
+          .input-group-addon
+            %span.glyphicon.glyphicon-euro
+          = f.number_field :price, class: 'form-control', value: 5, step: 'any'
+      .form-group
+        .input-group
+          .input-group-addon
+            %span.glyphicon.glyphicon-calendar
+          = f.date_field :date, class: 'form-control', value: Date.today
+      = f.hidden_field :restaurant_id
+      = f.submit 'Update', class: 'btn btn-success'
+      = link_to 'Back', restaurant_path(@menu.restaurant), class: 'btn btn-danger'

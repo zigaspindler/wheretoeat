@@ -1,0 +1,18 @@
+%nav.navbar.navbar-default
+  .container-fluid
+    .navbar-header
+      = link_to 'Where to eat?!', root_path, class: 'navbar-brand'
+    #navigation.collapse.navbar-collapse
+      %ul.nav.navbar-nav
+        %li{class: ('active' if params[:controller] == 'restaurants')}
+          = link_to 'Restaurants', restaurants_path
+      %ul.nav.navbar-nav.navbar-right
+        %li.dropdown
+          %a.dropdown-toggle{data: {toggle: 'dropdown'}, aria: {haspopup: 'true'}, role: 'button'}
+            = current_user.username
+            %span.caret
+          %ul.dropdown-menu
+            %li
+              = link_to 'Change password', edit_user_registration_path
+            %li
+              = link_to 'Logout', destroy_user_session_path, method: :delete
