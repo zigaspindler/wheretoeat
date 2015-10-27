@@ -1,2 +1,15 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+}
+
+.panel-body-fixed {
+  min-height: 200px;
+  max-height: 200px;
+  overflow-y: scroll;
+}

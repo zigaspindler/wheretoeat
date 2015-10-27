@@ -1,12 +1,12 @@
 - @restaurants.each_slice(3) do |restaurants|
-  .row
+  .row.row-eq-height
     -restaurants.each do |restaurant|
       .col-md-4
         .panel.panel-default
           .panel-heading
             %h3.panel-title
               = link_to restaurant.name, restaurant_path(restaurant)
-          .panel-body
+          .panel-body.panel-body-fixed
             - if restaurant.todays_menus.empty?
               No data
             - else
