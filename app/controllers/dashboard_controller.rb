@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
   def index
-    @restaurants = Restaurant.all
+    @restaurants = Restaurant.order :name
   end
 end

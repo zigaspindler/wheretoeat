@@ -23,8 +23,4 @@ class Restaurant < ActiveRecord::Base
       vote.user
     end
   end
-
-  def helpers
-    ActionController::Base.helpers
-  end
 end
