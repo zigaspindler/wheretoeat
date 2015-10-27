@@ -5,7 +5,7 @@
       .col-md-4
         .panel.panel-default
           .panel-heading
-            %h3.panel-title= menu_object[:date]
+            %h3.panel-title= menu_object[:date].strftime("%e.%-m.%Y")
           .panel-body
             - if menu_object[:menus].empty?
               No data
