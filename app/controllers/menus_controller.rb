@@ -3,7 +3,7 @@ class MenusController < ApplicationController
     @menu = Menu.new
     @menu.restaurant = Restaurant.find params[:restaurant_id]
     @menu.price = @menu.restaurant.default_price
-    @menu.date = params[:date] if not params[:date].nil?
+    @menu.date = params[:date] unless params[:date].nil?
   end
 
   def edit
@@ -11,9 +11,15 @@ class MenusController < ApplicationController
   end
 
   def create
-    menu = Menu.new menu_params
-    menu.save
-    redirect_to restaurant_path(menu.restaurant)
+    menu_params[:description].each_with_index do |description, i|
+      if description != ''
+        menu = Menu.new(description: description, price: menu_params[:price][i])
+        menu.restaurant_id = menu_params[:restaurant_id]
+        menu.date = menu_params[:date]
+        menu.save
+      end
+    end
+    redirect_to restaurant_path(menu_params[:restaurant_id])
   end
 
   def update
@@ -31,6 +37,6 @@ class MenusController < ApplicationController
   private
 
   def menu_params
-    params.require(:menu).permit(:description, :restaurant_id, :date, :price)
+    @menu_params ||= params.require(:menu).permit(:restaurant_id, :date, price: [], description: [])
   end
 end

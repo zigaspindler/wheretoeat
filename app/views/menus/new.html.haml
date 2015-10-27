@@ -2,17 +2,22 @@
   .col-md-4.col-md-offset-4
     = form_for @menu, url: {action: 'create'} do |f|
       .form-group
-        = f.text_field :description, autofocus: true, class: 'form-control', placeholder: 'Description'
-      .form-group
-        .input-group
-          .input-group-addon
-            %span.glyphicon.glyphicon-euro
-          = f.number_field :price, class: 'form-control', step: 'any'
-      .form-group
         .input-group
           .input-group-addon
             %span.glyphicon.glyphicon-calendar
           = f.date_field :date, class: 'form-control'
+      .menus
+        .well.menu_form_fields
+          .form-group
+            = f.text_field :description, autofocus: true, class: 'form-control', placeholder: 'Description', multiple: true
+          .form-group
+            .input-group
+              .input-group-addon
+                %span.glyphicon.glyphicon-euro
+              = f.number_field :price, class: 'form-control', step: 'any', multiple: true
       = f.hidden_field :restaurant_id
+      .form-group
+        %a.btn.btn-primary#add_menu_fields{href: ''}
+          %span.glyphicon.glyphicon-plus
       = f.submit "Save", class: 'btn btn-success'
       = link_to 'Back', restaurant_path(@menu.restaurant), class: 'btn btn-danger'
