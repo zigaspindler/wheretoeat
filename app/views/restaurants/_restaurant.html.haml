@@ -1,3 +1,8 @@
 %tr
-  %td
+  %td.col-md-10
     = link_to restaurant.name, restaurant_path(restaurant)
+  %td.text-right
+    = restaurant.default_price
+  %td.text-right
+    = link_to edit_restaurant_path(restaurant) do
+      %span.glyphicon.glyphicon-pencil

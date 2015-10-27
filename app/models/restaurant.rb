@@ -3,11 +3,11 @@ class Restaurant < ActiveRecord::Base
   has_many :votes
 
   def grouped_menus
-    menus_hash = {}
+    menus_array = []
     for date in Date.today..4.days.from_now
-      menus_hash[date] = menus.where(date: date)
+      menus_array << {date: date, menus: menus.where(date: date)}
     end
-    menus_hash
+    menus_array
   end
 
   def todays_menus

@@ -1,3 +1,10 @@
 %table.table.table-hover
- = render @restaurants
+  %tr
+    %th
+      Name
+    %th.text-right
+      Default price
+    %th.text-right
+      Actions
+  = render @restaurants
 = link_to 'Add', new_restaurant_path, class: 'btn btn-success'

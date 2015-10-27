@@ -2,6 +2,8 @@ class MenusController < ApplicationController
   def new
     @menu = Menu.new
     @menu.restaurant = Restaurant.find params[:restaurant_id]
+    @menu.price = @menu.restaurant.default_price
+    @menu.date = params[:date] if not params[:date].nil?
   end
 
   def edit

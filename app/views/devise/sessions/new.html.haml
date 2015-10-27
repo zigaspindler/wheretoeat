@@ -10,10 +10,8 @@
         = f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Password'
       - if devise_mapping.rememberable?
         .checkbox
-          
           = f.label :remember_me, class: 'checkbox' do
-            = f.check_box :remember_me do
-              = 'Remember me'
+            = f.check_box :remember_me
+            = 'Remember me'
       .actions
         = f.submit "Log in", class: 'btn btn-default'
-    = render "devise/shared/links"

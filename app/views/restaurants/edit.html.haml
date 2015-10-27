@@ -1,12 +1,12 @@
 .row
   .col-md-4.col-md-offset-4
-    = form_for @restaurant, url: {action: 'create'} do |f|
+    = form_for @restaurant, url: {action: 'update'} do |f|
       .form-group
         = f.text_field :name, autofocus: true, class: 'form-control', placeholder: 'Name'
       .form-group
         .input-group
           .input-group-addon
             %span.glyphicon.glyphicon-euro
-          = f.number_field :default_price, class: 'form-control', value: 5, step: 'any'
+          = f.number_field :default_price, class: 'form-control', step: 'any'
       = f.submit "Save", class: 'btn btn-success'
       = link_to 'Back', restaurants_path, class: 'btn btn-danger'

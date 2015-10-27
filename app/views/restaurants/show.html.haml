@@ -1,24 +1,25 @@
 = @restaurant.name
-.row
-  - @restaurant.grouped_menus.each do |date, menus|
-    .col-md-4
-      .panel.panel-default
-        .panel-heading
-          %h3.panel-title= date
-        .panel-body
-          - if menus.empty?
-            No data
-          - else
-            %table.table.table-hover
-              - menus.each_with_index do |menu, i|
-                %tr
-                  %td.col-md-1.text-left= i + 1
-                  %td.col-md-8.text-left= menu.description
-                  %td.col-md-1.text-right= "#{menu.price}€"
-                  %td.col-md-2.text-right
-                    = link_to edit_restaurant_menu_path(menu.restaurant_id, menu.id) do
-                      %span.glyphicon.glyphicon-pencil
-                    = link_to restaurant_menu_path(menu.restaurant_id, menu.id), method: :delete do
-                      %span.glyphicon.glyphicon-remove.text-danger
-.row
-  = link_to 'Add menu', new_restaurant_menu_path(@restaurant), class: 'btn btn-success'
+- @restaurant.grouped_menus.each_slice(3) do |menus|
+  .row
+    - menus.each do |menu_object|
+      .col-md-4
+        .panel.panel-default
+          .panel-heading
+            %h3.panel-title= menu_object[:date]
+          .panel-body
+            - if menu_object[:menus].empty?
+              No data
+            - else
+              %table.table.table-hover
+                - menu_object[:menus].each_with_index do |menu, i|
+                  %tr
+                    %td.col-md-1.text-left= i + 1
+                    %td.col-md-8.text-left= menu.description
+                    %td.col-md-1.text-right= "#{menu.price}€"
+                    %td.col-md-2.text-right
+                      = link_to edit_restaurant_menu_path(menu.restaurant_id, menu.id) do
+                        %span.glyphicon.glyphicon-pencil
+                      = link_to restaurant_menu_path(menu.restaurant_id, menu.id), method: :delete do
+                        %span.glyphicon.glyphicon-remove.text-danger
+          .panel-footer
+            = link_to 'Add menu', new_restaurant_menu_path(@restaurant, date: menu_object[:date]), class: 'btn btn-success'
