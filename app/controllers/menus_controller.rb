@@ -11,15 +11,15 @@ class MenusController < ApplicationController
   end
 
   def create
-    menu_params[:description].each_with_index do |description, i|
+    menu_params_array[:description].each_with_index do |description, i|
       if description != ''
-        menu = Menu.new(description: description, price: menu_params[:price][i])
-        menu.restaurant_id = menu_params[:restaurant_id]
-        menu.date = menu_params[:date]
+        menu = Menu.new(description: description, price: menu_params_array[:price][i])
+        menu.restaurant_id = menu_params_array[:restaurant_id]
+        menu.date = menu_params_array[:date]
         menu.save
       end
     end
-    redirect_to restaurant_path(menu_params[:restaurant_id])
+    redirect_to restaurant_path(menu_params_array[:restaurant_id])
   end
 
   def update
@@ -37,6 +37,10 @@ class MenusController < ApplicationController
   private
 
   def menu_params
-    @menu_params ||= params.require(:menu).permit(:restaurant_id, :date, price: [], description: [])
+    params.require(:menu).permit(:restaurant_id, :date, :price, :description)
+  end
+
+  def menu_params_array
+    @menu_params_array ||= params.require(:menu).permit(:restaurant_id, :date, price: [], description: [])
   end
 end
