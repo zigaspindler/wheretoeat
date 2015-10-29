@@ -1,21 +1,24 @@
 - @restaurants.each_slice(3) do |restaurants|
-  .row.row-eq-height
+  .row.row-eq-height.restaurants
     -restaurants.each do |restaurant|
       .col-md-4
         .panel.panel-default
           .panel-heading
             %h3.panel-title
               = link_to restaurant.name, restaurant_path(restaurant)
-          .panel-body.panel-body-fixed
-            - if restaurant.todays_menus.empty?
+              - unless restaurant.telephone_number.nil?
+                %span.phone
+                  = link_to restaurant.telephone_number, "tel:#{restaurant.telephone_number}"
+          - if restaurant.todays_menus.empty?
+            .panel-body.panel-body-fixed
               No data
-            - else
-              %table.table.table-hover
-                - restaurant.todays_menus.each_with_index do |menu, i|
-                  %tr
-                    %td.col-md-1.text-left= i + 1
-                    %td.col-md-9.text-left= menu.description
-                    %td.col-md-2.text-right= "#{menu.price}€"
+          - else
+            %table.table.table-hover
+              - restaurant.todays_menus.each_with_index do |menu, i|
+                %tr
+                  %td.col-md-1.text-left= i + 1
+                  %td.col-md-9.text-left= menu.description
+                  %td.col-md-2.text-right= "#{menu.price}€"
           .panel-footer
             .row
               .col-md-2
