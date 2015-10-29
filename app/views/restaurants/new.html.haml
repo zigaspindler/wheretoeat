@@ -8,5 +8,7 @@
           .input-group-addon
             %span.glyphicon.glyphicon-euro
           = f.number_field :default_price, class: 'form-control', value: 5, step: 'any'
+      .form-group
+        = f.text_field :telephone_number, class: 'form-control', placeholder: '555-1234'
       = f.submit "Save", class: 'btn btn-success'
       = link_to 'Back', restaurants_path, class: 'btn btn-danger'

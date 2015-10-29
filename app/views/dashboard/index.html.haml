@@ -1,11 +1,14 @@
 - @restaurants.each_slice(3) do |restaurants|
-  .row.row-eq-height
+  .row.row-eq-height.restaurants
     -restaurants.each do |restaurant|
       .col-md-4
         .panel.panel-default
           .panel-heading
             %h3.panel-title
               = link_to restaurant.name, restaurant_path(restaurant)
+              - unless restaurant.telephone_number.nil?
+                %span.phone
+                  = link_to restaurant.telephone_number, "tel:#{restaurant.telephone_number}"
           .panel-body.panel-body-fixed
             - if restaurant.todays_menus.empty?
               No data
