@@ -9,16 +9,17 @@
               - unless restaurant.telephone_number.nil?
                 %span.phone
                   = link_to restaurant.telephone_number, "tel:#{restaurant.telephone_number}"
-          .panel-body.panel-body-fixed
+          %table.table.table-hover.table-fixed-height
             - if restaurant.todays_menus.empty?
-              No data
+              %tr
+                %td.text-center
+                  No data
             - else
-              %table.table.table-hover
-                - restaurant.todays_menus.each_with_index do |menu, i|
-                  %tr
-                    %td.col-md-1.text-left= i + 1
-                    %td.col-md-9.text-left= menu.description
-                    %td.col-md-2.text-right= "#{menu.price}€"
+              - restaurant.todays_menus.each_with_index do |menu, i|
+                %tr
+                  %td.col-md-1.text-left= i + 1
+                  %td.col-md-9.text-left= menu.description
+                  %td.col-md-2.text-right= "#{menu.price}€"
           .panel-footer
             .row
               .col-md-2
