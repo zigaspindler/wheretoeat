@@ -21,7 +21,7 @@
                     %td.col-md-2.text-right
                       = link_to edit_restaurant_menu_path(menu.restaurant_id, menu.id) do
                         %span.glyphicon.glyphicon-pencil
-                      = link_to restaurant_menu_path(menu.restaurant_id, menu.id), method: :delete do
+                      = link_to restaurant_menu_path(menu.restaurant_id, menu.id), method: :delete, data: {confirm: 'Are you sure?'} do
                         %span.glyphicon.glyphicon-remove.text-danger
           .panel-footer
             = link_to 'Add menu', new_restaurant_menu_path(@restaurant, date: menu_object[:date]), class: 'btn btn-success'
