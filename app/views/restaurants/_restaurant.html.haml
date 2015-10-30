@@ -6,3 +6,5 @@
   %td.text-right
     = link_to edit_restaurant_path(restaurant) do
       %span.glyphicon.glyphicon-pencil
+    = link_to restaurant_path(restaurant), method: :delete do
+      %span.glyphicon.glyphicon-remove.text-danger
