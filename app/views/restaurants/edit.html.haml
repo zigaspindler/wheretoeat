@@ -10,5 +10,7 @@
           = f.number_field :default_price, class: 'form-control', step: 'any'
       .form-group
         = f.text_field :telephone_number, class: 'form-control', placeholder: '555-1234'
+      .form-group
+        = f.url_field :menu_link, class: 'form-control', placeholder: 'http://menu.link'
       = f.submit "Save", class: 'btn btn-success'
       = link_to 'Back', restaurants_path, class: 'btn btn-danger'

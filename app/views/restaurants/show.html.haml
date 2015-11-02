@@ -1,4 +1,6 @@
-= @restaurant.name
+%h3
+  = @restaurant.name
+= link_to 'Menus', @restaurant.menu_link, target: '_blank' unless @restaurant.menu_link.nil?
 - @restaurant.grouped_menus.each_slice(3) do |menus|
   .row
     - menus.each do |menu_object|
