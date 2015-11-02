@@ -15,6 +15,7 @@ class MenusController < ApplicationController
       if description != ''
         menu = Menu.new(description: description, price: menu_params_array[:price][i])
         menu.restaurant_id = menu_params_array[:restaurant_id]
+        menu.regular = menu_params_array[:regular]
         menu.date = menu_params_array[:date]
         menu.save
       end
@@ -37,10 +38,10 @@ class MenusController < ApplicationController
   private
 
   def menu_params
-    params.require(:menu).permit(:restaurant_id, :date, :price, :description)
+    params.require(:menu).permit(:restaurant_id, :date, :price, :description, :regular)
   end
 
   def menu_params_array
-    @menu_params_array ||= params.require(:menu).permit(:restaurant_id, :date, price: [], description: [])
+    @menu_params_array ||= params.require(:menu).permit(:restaurant_id, :date, :regular, price: [], description: [])
   end
 end

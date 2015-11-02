@@ -16,7 +16,7 @@
                     No data
               - else
                 - menu_object[:menus].each_with_index do |menu, i|
-                  %tr
+                  %tr{class: ('info' if menu.regular?)}
                     %td.col-md-1.text-left= i + 1
                     %td.col-md-8.text-left= menu.description
                     %td.col-md-1.text-right= "#{menu.price}€"

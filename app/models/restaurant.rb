@@ -5,13 +5,13 @@ class Restaurant < ActiveRecord::Base
   def grouped_menus
     menus_array = []
     for date in Date.today..4.days.from_now
-      menus_array << {date: date, menus: menus.where(date: date).order(:id)}
+      menus_array << {date: date, menus: menus.where('date=? OR regular=true', date)}
     end
     menus_array
   end
 
   def todays_menus
-    @todays_menus ||= menus.where(date: Date.today).order(:id)
+    @todays_menus ||= menus.where('date=? OR regular=true', Date.today)
   end
 
   def today_votes_number

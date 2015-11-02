@@ -6,6 +6,10 @@
           .input-group-addon
             %span.glyphicon.glyphicon-calendar
           = f.date_field :date, class: 'form-control'
+      .checkbox
+        = f.label :regular, class: 'checkbox' do
+          = f.check_box :regular
+          = 'Regular?'
       .menus
         .well.menu_form_fields
           .form-group
