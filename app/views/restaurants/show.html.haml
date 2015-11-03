@@ -1,10 +1,10 @@
 %h3
   = @restaurant.name
 = link_to 'Menus', @restaurant.menu_link, target: '_blank' unless @restaurant.menu_link.nil?
-- @restaurant.grouped_menus.each_slice(3) do |menus|
+- @restaurant.grouped_menus.each_slice(4) do |menus|
   .row
     - menus.each do |menu_object|
-      .col-md-4
+      .col-md-3
         .panel.panel-default
           .panel-heading
             %h3.panel-title= menu_object[:date].strftime("%e.%-m.%Y")

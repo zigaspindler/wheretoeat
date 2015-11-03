@@ -1,39 +1,42 @@
-- @restaurants.each_slice(3) do |restaurants|
-  .row.row-eq-height.restaurants
-    -restaurants.each do |restaurant|
-      .col-md-4
-        .panel.panel-default
-          .panel-heading
-            %h3.panel-title
-              = link_to restaurant.name, restaurant_path(restaurant)
-              - unless restaurant.telephone_number.nil?
-                %span.phone
-                  = link_to restaurant.telephone_number, "tel:#{restaurant.telephone_number}"
-          .fixed-height
-            %table.table.table-hover
-              - if restaurant.todays_menus.empty?
-                %tr
-                  %td.text-center
-                    No data
-              - else
-                - restaurant.todays_menus.each_with_index do |menu, i|
-                  %tr{class: ('info' if menu.regular?)}
-                    %td.col-md-1.text-left= i + 1
-                    %td.col-md-9.text-left= menu.description
-                    %td.col-md-2.text-right= "#{menu.price}€"
-          .panel-footer
-            .row
-              .col-md-2
-                - unless current_user.voted?(restaurant.id)
-                  = link_to 'Vote', vote_path(restaurant_id: restaurant), method: :post, class: 'btn btn-success'
+.col-md-9
+  - @restaurants.each_slice(3) do |restaurants|
+    .row.row-eq-height.restaurants
+      -restaurants.each do |restaurant|
+        .col-md-4
+          .panel.panel-default
+            .panel-heading
+              %h3.panel-title
+                = link_to restaurant.name, restaurant_path(restaurant)
+                - unless restaurant.telephone_number.nil?
+                  %span.phone
+                    = link_to restaurant.telephone_number, "tel:#{restaurant.telephone_number}"
+            .fixed-height
+              %table.table.table-hover
+                - if restaurant.todays_menus.empty?
+                  %tr
+                    %td.text-center
+                      No data
                 - else
-                  %button.btn.btn-success{disabled: 'disabled'}
-                    Voted!
-              .col-md-10.text-right
-                %h5
-                  No. of votes
-                  %span.badge
-                    = restaurant.today_votes_number
-              .col-md-12.text-right
-                - restaurant.voters.each do |voter|
-                  %span.badge= voter.initials
+                  - restaurant.todays_menus.each_with_index do |menu, i|
+                    %tr{class: ('info' if menu.regular?)}
+                      %td.col-md-1.text-left= i + 1
+                      %td.col-md-9.text-left= menu.description
+                      %td.col-md-2.text-right= "#{menu.price}€"
+            .panel-footer
+              .row
+                .col-md-2
+                  - unless current_user.voted?(restaurant.id)
+                    = link_to 'Vote', vote_path(restaurant_id: restaurant), method: :post, class: 'btn btn-success'
+                  - else
+                    %button.btn.btn-success{disabled: 'disabled'}
+                      Voted!
+                .col-md-10.text-right
+                  %h5
+                    No. of votes
+                    %span.badge
+                      = restaurant.today_votes_number
+                .col-md-12.text-right
+                  - restaurant.voters.each do |voter|
+                    %span.badge= voter.initials
+.col-md-3
+  = render partial: 'comments'

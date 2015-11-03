@@ -9,5 +9,7 @@ Rails.application.routes.draw do
   
   resources :dashboard, only: :index
 
+  resources :comments, only: :create
+
   post 'vote', to: 'votes#create'
 end

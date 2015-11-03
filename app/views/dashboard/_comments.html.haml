@@ -1,0 +1,11 @@
+.panel.panel-default
+  .panel-heading
+    %h3.panel-title
+      Comments
+  %ul.list-group
+    = render partial: 'comment', collection: @comments
+  .panel-footer
+    = form_for @comment, url: {controller: 'comments',action: 'create'} do |f|
+      .form-group
+        = f.text_area :text, placeholder: 'Write a comment...', required: true, class: 'form-control'
+      = f.submit "Leave comment", class: 'btn btn-success'
