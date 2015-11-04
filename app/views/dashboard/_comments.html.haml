@@ -8,4 +8,4 @@
     = form_for @comment, url: {controller: 'comments',action: 'create'} do |f|
       .form-group
         = f.text_area :text, placeholder: 'Write a comment...', required: true, class: 'form-control'
-      = f.submit "Leave comment", class: 'btn btn-success'
+      = f.submit "Leave a comment", class: 'btn btn-success'
