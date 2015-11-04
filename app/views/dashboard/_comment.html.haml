@@ -1,7 +1,9 @@
 %li.list-group-item
-  %h4.list-group-item-heading
-    = comment.user.username
+  .row
+    .col-md-8
+      %h4.list-group-item-heading
+        = comment.user.username
+    .col-md-4.text-right
+      = comment.created_at.in_time_zone('CET').strftime('%k:%M')
   %p.list-group-item-text
     = comment.text
-  %p.list-group-item-text.text-right
-    = comment.created_at.strftime('%k:%M')
