@@ -39,4 +39,8 @@
                   - restaurant.voters.each do |voter|
                     %span.badge= voter.initials
 .col-md-3
-  = render partial: 'comments'
+  .row
+    .col-md-12
+      = render partial: 'statisctics'
+    .col-md-12
+      = render partial: 'comments'

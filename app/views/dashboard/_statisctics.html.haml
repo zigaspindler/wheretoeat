@@ -1,0 +1,7 @@
+= javascript_include_tag '//www.google.com/jsapi', 'chartkick'
+.panel.panel-default
+  .panel-heading
+    %h3.panel-title
+      Top 5
+  .panel-body
+    = pie_chart @top_5, height: '200px'

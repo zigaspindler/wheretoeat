@@ -4,6 +4,7 @@ class DashboardController < ApplicationController
     @restaurants = Restaurant.order 'random()'
     @comments = Comment.where("created_at >= ?", Time.zone.now.beginning_of_day)
     @comment = Comment.new
+    @top_5 = top_5_voted
   end
 
   private
@@ -11,5 +12,16 @@ class DashboardController < ApplicationController
   def seed
     today = Date.today + 1
     Random.new(today.day * today.month * today.year).rand - 1
+  end
+
+  def top_5_voted
+    ActiveRecord::Base.connection.exec_query("
+      SELECT restaurants.name, COUNT(votes) as res_votes
+      FROM restaurants
+      LEFT JOIN votes as votes ON votes.restaurant_id = restaurants.id
+      WHERE votes.date = '2015-11-11'
+      GROUP BY restaurants.id
+      ORDER BY res_votes DESC
+      LIMIT 5").rows
   end
 end
