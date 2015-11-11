@@ -28,11 +28,16 @@ class DashboardController < ApplicationController
 
   def last_3_days
     top = []
-    stop = Date.today
-    start = stop - 3
-    for date in start...stop
-      top << {date: date, restaurant: top_for_date(date, 1).first.try(:first)}
+    date = Date.today - 1
+    stop = date - 2
+    while date >= stop
+      if date.wday == 6 || date.wday == 0
+        stop -= 1
+      else
+        top << {date: date, restaurant: top_for_date(date, 1).first.try(:first)}
+      end
+      date -= 1
     end
-    top.reverse
+    top
   end
 end
