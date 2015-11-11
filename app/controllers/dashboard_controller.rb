@@ -19,7 +19,7 @@ class DashboardController < ApplicationController
       SELECT restaurants.name, COUNT(votes) as res_votes
       FROM restaurants
       LEFT JOIN votes as votes ON votes.restaurant_id = restaurants.id
-      WHERE votes.date = '2015-11-11'
+      WHERE votes.date = '#{Date.today}'
       GROUP BY restaurants.id
       ORDER BY res_votes DESC
       LIMIT 5").rows
