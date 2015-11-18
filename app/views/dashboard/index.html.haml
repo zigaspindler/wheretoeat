@@ -28,7 +28,7 @@
                   - unless current_user.voted?(restaurant.id)
                     = link_to 'Vote', vote_path(restaurant_id: restaurant), method: :post, class: 'btn btn-success'
                   - else
-                    = link_to 'Unvote', vote_path, method: :delete, class: 'btn btn-danger'
+                    = link_to 'Unvote', vote_path, method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure?'}
                 .col-md-10.text-right
                   %h5
                     No. of votes
@@ -36,7 +36,8 @@
                       = restaurant.today_votes_number
                 .col-md-12.text-right
                   - restaurant.voters.each do |voter|
-                    %span.badge= voter.initials
+                    %span.badge{data: {toggle: 'tooltip', placement: 'bottom'}, title: voter.username}
+                      = voter.initials
 .col-md-3
   .row
     .col-md-12
