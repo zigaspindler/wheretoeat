@@ -11,5 +11,5 @@ Rails.application.routes.draw do
 
   resources :comments, only: :create
 
-  post 'vote', to: 'votes#create'
+  resource :vote, only: [:create, :destroy]
 end

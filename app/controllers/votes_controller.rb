@@ -5,4 +5,9 @@ class VotesController < ApplicationController
     vote.save
     redirect_to root_path
   end
+
+  def destroy
+    Vote.where(user: current_user, date: Date.today).destroy_all
+    redirect_to root_path
+  end
 end

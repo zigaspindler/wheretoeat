@@ -28,8 +28,7 @@
                   - unless current_user.voted?(restaurant.id)
                     = link_to 'Vote', vote_path(restaurant_id: restaurant), method: :post, class: 'btn btn-success'
                   - else
-                    %button.btn.btn-success{disabled: 'disabled'}
-                      Voted!
+                    = link_to 'Unvote', vote_path, method: :delete, class: 'btn btn-danger'
                 .col-md-10.text-right
                   %h5
                     No. of votes
