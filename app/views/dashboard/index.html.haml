@@ -6,22 +6,24 @@
           .panel.panel-default
             .panel-heading
               %h3.panel-title
+                %a.collapse-link{role: 'button', data: {toggle: 'collapse'}, href: "#restaurant_#{restaurant.id}", aria: {expanded: !current_user.collapsed?, controls: "#restaurant_#{restaurant.id}"}, class: ('collapsed' if current_user.collapsed?)}
                 = link_to restaurant.name, restaurant_path(restaurant)
                 - unless restaurant.telephone_number.nil?
                   %span.phone
                     = link_to restaurant.telephone_number, "tel:#{restaurant.telephone_number}"
-            .fixed-height
-              %table.table.table-hover
-                - if restaurant.todays_menus.empty?
-                  %tr
-                    %td.text-center
-                      No data
-                - else
-                  - restaurant.todays_menus.each_with_index do |menu, i|
-                    %tr{class: ('info' if menu.regular?)}
-                      %td.col-md-1.text-left= i + 1
-                      %td.col-md-9.text-left= menu.description
-                      %td.col-md-2.text-right= "#{menu.price}€"
+            .panel-collapse.collapse{id: "restaurant_#{restaurant.id}", class: ('in' unless current_user.collapsed?)}
+              .fixed-height
+                %table.table.table-hover
+                  - if restaurant.todays_menus.empty?
+                    %tr
+                      %td.text-center
+                        No data
+                  - else
+                    - restaurant.todays_menus.each_with_index do |menu, i|
+                      %tr{class: ('info' if menu.regular?)}
+                        %td.col-md-1.text-left= i + 1
+                        %td.col-md-9.text-left= menu.description
+                        %td.col-md-2.text-right= "#{menu.price}€"
             .panel-footer
               .row
                 .col-md-2

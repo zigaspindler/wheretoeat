@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151103094555) do
+ActiveRecord::Schema.define(version: 20151118120258) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "comments", force: :cascade do |t|
     t.string   "text"
@@ -60,6 +61,7 @@ ActiveRecord::Schema.define(version: 20151103094555) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "username"
+    t.hstore   "settings"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

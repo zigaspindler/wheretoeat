@@ -22,3 +22,19 @@
     }
   }
 }
+
+a.collapse-link {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.panel-heading a.collapse-link:after {
+    font-family:'Glyphicons Halflings';
+    content:"\e114";
+    color: grey;
+}
+.panel-heading a.collapse-link.collapsed:after {
+    content:"\e080";
+}

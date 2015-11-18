@@ -1,0 +1,15 @@
+.row
+  .col-md-4.col-md-offset-4
+    %table.table.table-hover
+      %tr
+        %th
+          Name
+        %th.text-right
+          Enabled
+      - @settings.each do |setting|
+        %tr
+          %td
+            = setting
+          %td.text-right
+            %label
+              %input{type: 'checkbox', checked: current_user.send("#{setting}?"), data: {toggle: 'toggle', name: setting}}

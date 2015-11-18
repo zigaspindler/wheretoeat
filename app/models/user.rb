@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :votes
   has_many :comments
 
+  store_accessor :settings, :collapsed
+
   def email_required?
     false
   end
@@ -21,5 +23,9 @@ class User < ActiveRecord::Base
 
   def initials
     "#{username[0]}#{username[-1]}".upcase
+  end
+
+  def collapsed?
+    collapsed == 'true'
   end
 end
