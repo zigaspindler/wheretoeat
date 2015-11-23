@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   
   resources :restaurants do
     resources :menus, except: :index
+    get 'update_menus', to: 'restaurants#update_menus'
   end
   
   resources :dashboard, only: :index

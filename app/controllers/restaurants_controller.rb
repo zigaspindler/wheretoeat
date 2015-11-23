@@ -1,4 +1,6 @@
 class RestaurantsController < ApplicationController
+  require 'kamjest_communicator'
+
   def index
     @restaurants = Restaurant.order :name
   end
@@ -33,9 +35,23 @@ class RestaurantsController < ApplicationController
     redirect_to restaurants_path
   end
 
+  def update_menus
+    restaurant = Restaurant.find(params[:restaurant_id])
+    dates = KamjestCommunicator.new(restaurant).get_menus
+    dates.each do |date|
+      restaurant.menus.where(date: date['date']).destroy_all
+      date['offers'].each do |offer|
+        unless restaurant.kamjest_id == 'selih' && offer['type'] == 'KOSILO'
+          Menu.new(description: offer['text'], price: offer['price'], date: date['date'], restaurant: restaurant).save
+        end
+      end
+    end
+    redirect_to restaurants_path
+  end
+
   private
 
   def restaurant_params
-    params.require(:restaurant).permit(:name, :default_price, :telephone_number, :menu_link)
+    params.require(:restaurant).permit(:name, :default_price, :telephone_number, :menu_link, :kamjest_id)
   end
 end

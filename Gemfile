@@ -15,6 +15,7 @@ gem 'devise'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'haml-rails', '~> 0.9'
 gem 'chartkick'
+gem 'httparty'
 
 group :development, :test do
   gem 'byebug'
