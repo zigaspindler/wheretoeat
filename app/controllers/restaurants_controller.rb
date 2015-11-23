@@ -42,7 +42,7 @@ class RestaurantsController < ApplicationController
       restaurant.menus.where(date: date['date']).destroy_all
       date['offers'].each do |offer|
         unless restaurant.kamjest_id == 'selih' && offer['type'] == 'KOSILO'
-          Menu.new(description: offer['text'], price: offer['price'], date: date['date'], restaurant: restaurant).save
+          Menu.new(description: offer['text'], price: offer['price'], date: date['date'], restaurant: restaurant, regular: false).save
         end
       end
     end
