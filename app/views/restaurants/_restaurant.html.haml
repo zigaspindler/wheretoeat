@@ -4,7 +4,7 @@
   %td.text-right
     = restaurant.default_price
   %td.text-right
-    - unless restaurant.kamjest_id.nil?
+    - unless restaurant.kamjest_id.nil? || restaurant.kamjest_id == ''
       = link_to restaurant_update_menus_path(restaurant) do
         %span.glyphicon.glyphicon-refresh
     = link_to edit_restaurant_path(restaurant) do
