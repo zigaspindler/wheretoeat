@@ -11,4 +11,5 @@
   %body
     .container-fluid
       = render 'shared/navigation' if user_signed_in?
+      #alerts
       = yield

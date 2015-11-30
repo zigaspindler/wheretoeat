@@ -46,7 +46,7 @@ class RestaurantsController < ApplicationController
         end
       end
     end
-    redirect_to restaurants_path
+    render json: {status: 'success'}
   end
 
   private

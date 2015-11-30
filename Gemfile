@@ -17,6 +17,7 @@ gem 'haml-rails', '~> 0.9'
 gem 'chartkick'
 gem 'httparty'
 gem 'httplog'
+gem 'font-awesome-rails'
 
 group :development, :test do
   gem 'byebug'
