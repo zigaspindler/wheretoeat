@@ -6,5 +6,7 @@
       Default price
     %th.text-right
       Actions
+      = link_to restaurants_path, class: 'refresh_all_menus', title: 'Refresh all' do
+        %i.fa.fa-refresh
   = render @restaurants
 = link_to 'Add', new_restaurant_path, class: 'btn btn-success'
