@@ -9,7 +9,7 @@ class KamjestCommunicator
   def get_menus
     response = self.class.post('/graphql',
       body: {
-        query: "{restaurants(id:\"#{@restaurant.kamjest_id}\"){id, dailyOffers{date, offers{text, type, price}}}}"
+        query: "{restaurants(id:\"#{@restaurant.kamjest_id}\"){id dailyOffers{date offers{text type price}}}}"
       }
     )
     response['data']['restaurants'].first['dailyOffers']
