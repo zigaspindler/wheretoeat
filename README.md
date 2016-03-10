@@ -1,3 +1,5 @@
+[ ![Codeship Status for springfield/wheretoeat](https://codeship.com/projects/a91d89d0-c8eb-0133-db76-06c431dd0dcf/status?branch=master)](https://codeship.com/projects/139509)
+
 Where to eat?!
 ==============
 App for simple voting where go to eat.
