@@ -28,6 +28,7 @@ group :development do
   gem 'pry-rails'
   gem 'pry-remote'
   gem 'spring'
+  gem 'figaro'
 end
 
 gem 'rails_12factor', group: :production

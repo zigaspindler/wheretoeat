@@ -45,6 +45,8 @@
     .col-md-12
       = render partial: 'top_5'
     .col-md-12
+      = render partial: 'balance_table' unless @balances.empty?
+    .col-md-12
       = render partial: 'last_3_days'
     .col-md-12
       = render partial: 'comments'

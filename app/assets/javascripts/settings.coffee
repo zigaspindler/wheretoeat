@@ -1,16 +1,22 @@
 $ ->
   $('[data-toggle="toggle"]').change ->
     el = $(@)
-    $.ajax
+    saveSetting(el.data('name'), el.prop('checked'), el.parent().parent().parent().parent())
+
+  $('#save_sr').click ->
+    el = $(@).parent().parent()
+    saveSetting('shortreckonings_id', $('#sr_id').val(), el)
+
+saveSetting = (name, value, el) ->
+  $.ajax
       type: 'POST'
       url: '/settings'
       data:
-        name: el.data('name')
-        value: el.prop('checked')
+        name: name
+        value: value
       success: ->
-        tr = el.parent().parent().parent().parent()
-        tr.addClass 'success'
+        el.addClass 'success'
           .delay 2000
           .queue (next) ->
-            tr.removeClass 'success'
+            el.removeClass 'success'
             next()

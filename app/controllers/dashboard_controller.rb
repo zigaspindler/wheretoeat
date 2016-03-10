@@ -6,6 +6,7 @@ class DashboardController < ApplicationController
     @comment = Comment.new
     @top_5 = top_for_date Date.today
     @last_3_days = last_3_days
+    @balances = balances
   end
 
   private
@@ -39,5 +40,19 @@ class DashboardController < ApplicationController
       date -= 1
     end
     top
+  end
+
+  def balances
+    app_id = ENV['SR_APP_ID']
+    return [] unless app_id
+    response = HTTParty.get("http://www.shortreckonings.com/ajax.php?tid=#{app_id}&token=54&caller=model&action=payments&")
+    JSON.parse(response.body)['data']['totals'].map { |balance|
+      user = {
+        balance: balance['own'].to_i - balance['owes'].to_i
+      }
+
+      user[:name] = User.find_by(shortreckonings_id: balance['pid']).try(:username) || balance['pid']
+      user
+    }.sort { |u| u[:balance] }
   end
 end

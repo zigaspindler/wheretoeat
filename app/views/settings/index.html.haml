@@ -13,3 +13,9 @@
           %td.text-right
             %label
               %input{type: 'checkbox', checked: current_user.send("#{setting}?"), data: {toggle: 'toggle', name: setting}}
+      %tr
+        %td
+          %input#sr_id.form-control{value: current_user.shortreckonings_id}
+        %td.text-right
+          %button#save_sr.btn.btn-success
+            Save
