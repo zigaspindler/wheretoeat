@@ -53,6 +53,6 @@ class DashboardController < ApplicationController
 
       user[:name] = User.find_by(shortreckonings_id: balance['pid']).try(:username) || balance['pid']
       user
-    }.sort { |u| u[:balance] }
+    }[0...-1].sort { |u| u[:balance] }
   end
 end
