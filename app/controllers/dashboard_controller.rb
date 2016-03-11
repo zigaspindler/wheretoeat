@@ -45,14 +45,18 @@ class DashboardController < ApplicationController
   def balances
     app_id = ENV['SR_APP_ID']
     return [] unless app_id
-    response = HTTParty.get("http://www.shortreckonings.com/ajax.php?tid=#{app_id}&token=54&caller=model&action=payments&")
-    JSON.parse(response.body)['data']['totals'].map { |balance|
-      user = {
-        balance: balance['own'].to_i - balance['owes'].to_i
-      }
+    begin
+      response = HTTParty.get("http://www.shortreckonings.com/ajax.php?tid=#{app_id}&token=54&caller=model&action=payments&")
+      JSON.parse(response.body)['data']['totals'].map { |balance|
+        user = {
+          balance: balance['own'].to_i - balance['owes'].to_i
+        }
 
-      user[:name] = User.find_by(shortreckonings_id: balance['pid']).try(:username) || balance['pid']
-      user
-    }[0...-1].sort_by { |u| u[:balance] }
+        user[:name] = User.find_by(shortreckonings_id: balance['pid']).try(:username) || balance['pid']
+        user
+      }[0...-1].sort_by { |u| u[:balance] }
+    rescue
+      []
+    end
   end
 end
