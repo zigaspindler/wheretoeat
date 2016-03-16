@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160310130521) do
+ActiveRecord::Schema.define(version: 20160316095123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,9 +22,18 @@ ActiveRecord::Schema.define(version: 20160310130521) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "group_id"
   end
 
+  add_index "comments", ["group_id"], name: "index_comments_on_group_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "groups", force: :cascade do |t|
+    t.string   "name"
+    t.string   "sr_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "menus", force: :cascade do |t|
     t.string   "description"
@@ -50,23 +59,26 @@ ActiveRecord::Schema.define(version: 20160310130521) do
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: ""
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.string   "username"
     t.hstore   "settings"
     t.integer  "shortreckonings_id"
+    t.integer  "group_id"
+    t.boolean  "admin",                  default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["group_id"], name: "index_users_on_group_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
@@ -76,13 +88,18 @@ ActiveRecord::Schema.define(version: 20160310130521) do
     t.integer  "restaurant_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "group_id"
   end
 
+  add_index "votes", ["group_id"], name: "index_votes_on_group_id", using: :btree
   add_index "votes", ["restaurant_id"], name: "index_votes_on_restaurant_id", using: :btree
   add_index "votes", ["user_id"], name: "index_votes_on_user_id", using: :btree
 
+  add_foreign_key "comments", "groups"
   add_foreign_key "comments", "users"
   add_foreign_key "menus", "restaurants"
+  add_foreign_key "users", "groups"
+  add_foreign_key "votes", "groups"
   add_foreign_key "votes", "restaurants"
   add_foreign_key "votes", "users"
 end

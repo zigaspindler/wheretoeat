@@ -2,7 +2,7 @@ class DashboardController < ApplicationController
   def index
     Restaurant.connection.execute "select setseed(#{seed})"
     @restaurants = Restaurant.order 'random()'
-    @comments = Comment.where("created_at >= ?", Time.zone.now.beginning_of_day)
+    @comments = Comment.where("created_at >= ? and group_id = ?", Time.zone.now.beginning_of_day, current_group.id)
     @comment = Comment.new
     @top_5 = top_for_date Date.today
     @last_3_days = last_3_days
@@ -22,6 +22,7 @@ class DashboardController < ApplicationController
       FROM restaurants
       LEFT JOIN votes as votes ON votes.restaurant_id = restaurants.id
       WHERE votes.date = '#{date}'
+      AND votes.group_id = #{current_group.id}
       GROUP BY restaurants.id
       ORDER BY res_votes DESC
       LIMIT #{top}").rows
@@ -43,8 +44,8 @@ class DashboardController < ApplicationController
   end
 
   def balances
-    app_id = ENV['SR_APP_ID']
-    return [] unless app_id
+    app_id = current_group.sr_id
+    return [] if app_id.nil? || app_id == ''
     begin
       response = HTTParty.get("http://www.shortreckonings.com/ajax.php?tid=#{app_id}&token=54&caller=model&action=payments&")
       JSON.parse(response.body)['data']['totals'].map { |balance|

@@ -2,6 +2,7 @@ class CommentsController < ApplicationController
   def create
     comment = Comment.new comment_params
     comment.user = current_user
+    comment.group = current_group
     comment.save
     redirect_to dashboard_index_path
   end

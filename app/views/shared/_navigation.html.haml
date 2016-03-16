@@ -6,6 +6,11 @@
       %ul.nav.navbar-nav
         %li{class: ('active' if params[:controller] == 'restaurants')}
           = link_to 'Restaurants', restaurants_path
+        %li{class: ('active' if params[:controller] == 'groups')}
+          = link_to current_group.name, group_path
+        - if current_user.admin?
+          %li{class: ('active' if params[:controller] == 'admin')}
+            = link_to 'Admin', admin_path
       %ul.nav.navbar-nav.navbar-right
         %li.dropdown
           %a.dropdown-toggle{data: {toggle: 'dropdown'}, aria: {haspopup: 'true'}, role: 'button'}

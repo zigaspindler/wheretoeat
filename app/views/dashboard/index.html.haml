@@ -35,9 +35,9 @@
                   %h5
                     No. of votes
                     %span.badge
-                      = restaurant.today_votes_number
+                      = restaurant.today_votes_number(current_user)
                 .col-md-12.text-right
-                  - restaurant.voters.each do |voter|
+                  - restaurant.voters(current_user).each do |voter|
                     %span.badge{data: {toggle: 'tooltip', placement: 'bottom'}, title: voter.username}
                       = voter.initials
 .col-md-3

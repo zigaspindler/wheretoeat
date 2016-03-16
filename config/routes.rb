@@ -15,4 +15,12 @@ Rails.application.routes.draw do
   resource :vote, only: [:create, :destroy]
 
   resources :settings, only: [:index, :create]
+
+  resource :admin, only: :show, controller: :admin do
+    post :create_group
+  end
+
+  resource :group, only: [:show, :update] do
+    post :add_user
+  end
 end

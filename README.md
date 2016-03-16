@@ -14,4 +14,4 @@ Supports
 - chat
 - fetch restaurant offers from [kam-jest](https://github.com/matjaz/kam-jest)
 - user authentication
-- [Shortreckonings](http://www.shortreckonings.com/) (set ENV variable SR_APP_ID with app id)
+- [Shortreckonings](http://www.shortreckonings.com/)

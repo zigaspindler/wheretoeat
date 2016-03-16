@@ -1,6 +1,8 @@
 class RestaurantsController < ApplicationController
   require 'kamjest_communicator'
 
+  before_action :admin?, except: [:index, :show]
+
   def index
     @restaurants = Restaurant.order :name
   end

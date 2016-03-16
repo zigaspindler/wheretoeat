@@ -14,12 +14,12 @@ class Restaurant < ActiveRecord::Base
     @todays_menus ||= menus.where('date=? OR regular=true', Date.today).order(:regular)
   end
 
-  def today_votes_number
-    @no_of_votes ||= votes.where(date: Date.today).count
+  def today_votes_number(user)
+    @no_of_votes ||= votes.where(date: Date.today, group: user.group).count
   end
 
-  def voters
-    @voters ||= votes.where(date: Date.today).map do |vote|
+  def voters(user)
+    @voters ||= votes.where(date: Date.today, group: user.group).map do |vote|
       vote.user
     end
   end
