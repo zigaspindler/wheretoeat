@@ -2,7 +2,7 @@
   .col-md-4.col-md-offset-4
     = form_for @group, url: {controller: 'admin', action: 'create_group'} do |f|
       .form-group
-        = f.text_field :name, class: 'form-control', placeholder: 'Name', required: true
+        = f.text_field :name, class: 'form-control', placeholder: 'Group name', required: true
       .form-group
         = f.text_field :sr_id, class: 'form-control', placeholder: 'Shortreckonings ID'
 

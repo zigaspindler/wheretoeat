@@ -6,8 +6,12 @@
     = form_for @group, url: {controller: 'groups', action: 'update'}, method: :put do |f|
       .panel-body
         .form-group
+          %label{for: 'group_name'}
+            Group name
           = f.text_field :name, class: 'form-control', required: true
         .form-group
+          %label{for: 'group_sr_id'}
+            Shortreckonings ID
           = f.text_field :sr_id, class: 'form-control', placeholder: 'Shortreckonings ID'
       .panel-footer
         = f.submit 'Update', class: 'btn btn-success'
