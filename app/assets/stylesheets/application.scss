@@ -39,3 +39,9 @@ a.collapse-link {
 .panel-heading a.collapse-link.collapsed:after {
     content:"\e080";
 }
+
+.fork-me {
+  -ms-transform: rotate(-25deg);
+  -webkit-transform: rotate(-25deg);
+  transform: rotate(-25deg);
+}
