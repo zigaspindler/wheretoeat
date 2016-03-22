@@ -12,10 +12,10 @@
     .container-fluid
       = render 'shared/navigation' if user_signed_in?
       #alerts
-      - unless flash[:error].nil?
-        .alert.alert-danger.alert-dismissible{role: 'alert'}
+      - flash.each do |type, msg|
+        .alert.alert-dismissible{role: 'alert', class: flash_class_mapper(type)}
           %button.close{type: 'button', data: { dismiss: 'alert'}, aria: {label: 'Close'}}
             %span{aria: {hidden: 'true'}}
               &times;
-          = flash[:error]
+          = msg
       = yield

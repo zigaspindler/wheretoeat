@@ -1,45 +1,10 @@
 .col-md-9
+  - if @restaurants.empty?
+    .text-center
+      = link_to 'Add restaurants', group_path, class: 'btn btn-success'
   - @restaurants.each_slice(3) do |restaurants|
     .row.row-eq-height.restaurants
-      -restaurants.each do |restaurant|
-        .col-md-4
-          .panel.panel-default
-            .panel-heading
-              %h3.panel-title
-                %a.collapse-link{role: 'button', data: {toggle: 'collapse'}, href: "#restaurant_#{restaurant.id}", aria: {expanded: !current_user.collapsed?, controls: "#restaurant_#{restaurant.id}"}, class: ('collapsed' if current_user.collapsed?)}
-                = link_to restaurant.name, restaurant_path(restaurant)
-                - unless restaurant.telephone_number.nil?
-                  %span.phone
-                    = link_to restaurant.telephone_number, "tel:#{restaurant.telephone_number}"
-            .panel-collapse.collapse{id: "restaurant_#{restaurant.id}", class: ('in' unless current_user.collapsed?)}
-              .fixed-height
-                %table.table.table-hover
-                  - if restaurant.todays_menus.empty?
-                    %tr
-                      %td.text-center
-                        No data
-                  - else
-                    - restaurant.todays_menus.each_with_index do |menu, i|
-                      %tr{class: ('info' if menu.regular?)}
-                        %td.col-md-1.text-left= i + 1
-                        %td.col-md-9.text-left= menu.description
-                        %td.col-md-2.text-right= "#{menu.price}€"
-            .panel-footer
-              .row
-                .col-md-2
-                  - unless current_user.voted?(restaurant.id)
-                    = link_to 'Vote', vote_path(restaurant_id: restaurant), method: :post, class: 'btn btn-success'
-                  - else
-                    = link_to 'Unvote', vote_path, method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure?'}
-                .col-md-10.text-right
-                  %h5
-                    No. of votes
-                    %span.badge
-                      = restaurant.today_votes_number(current_user)
-                .col-md-12.text-right
-                  - restaurant.voters(current_user).each do |voter|
-                    %span.badge{data: {toggle: 'tooltip', placement: 'bottom'}, title: voter.username}
-                      = voter.initials
+      = render partial: 'restaurant', collection: restaurants
 .col-md-3
   .row
     .col-md-12

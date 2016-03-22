@@ -1,7 +1,7 @@
 class DashboardController < ApplicationController
   def index
     Restaurant.connection.execute "select setseed(#{seed})"
-    @restaurants = Restaurant.order 'random()'
+    @restaurants = current_group.restaurants.order 'random()'
     @comments = Comment.where("created_at >= ? and group_id = ?", Time.zone.now.beginning_of_day, current_group.id)
     @comment = Comment.new
     @top_5 = top_for_date Date.today

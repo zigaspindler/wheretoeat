@@ -1,0 +1,9 @@
+= form_tag '/group/update_restaurants', method: :put do
+  .panel.panel-default
+    .panel-heading
+      %h3.panel-title
+        Restaurants
+    %table.table.table-hover
+      = render partial: 'restaurant', collection: @restaurants
+    .panel-footer
+      = submit_tag 'Update', class: 'btn btn-success'

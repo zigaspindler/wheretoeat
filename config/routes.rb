@@ -22,5 +22,6 @@ Rails.application.routes.draw do
 
   resource :group, only: [:show, :update] do
     post :add_user
+    put :update_restaurants
   end
 end

@@ -29,4 +29,5 @@
         .form-group
           = f.text_field :username, class: 'form-control', placeholder: 'Username'
         = f.submit 'Add', class: 'btn btn-success'
-
+.col-md-4
+  = render partial: 'restaurants'

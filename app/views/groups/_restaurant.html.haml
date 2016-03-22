@@ -1,0 +1,6 @@
+%tr
+  %td
+    = restaurant.name
+  %td.text-right
+    = hidden_field_tag "restaurant_ids[#{restaurant.id}]", false
+    = check_box_tag "restaurant_ids[#{restaurant.id}]", true, current_group.restaurants.include?(restaurant)
