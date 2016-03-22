@@ -6,7 +6,6 @@ class DashboardController < ApplicationController
     @comment = Comment.new
     @top_5 = top_for_date Date.today
     @last_3_days = last_3_days
-    @balances = balances
   end
 
   private

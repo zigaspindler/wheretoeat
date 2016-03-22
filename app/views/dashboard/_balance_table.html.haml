@@ -2,12 +2,7 @@
   .panel-heading
     %h3.panel-title
       Balance table
-  %table.table.table-hover
+  %table.table.table-hover#balance-table
     %tr
-      %th Name
-      %th.text-right Balance
-    - @balances.each do |balance|
-      %tr
-        %td= balance[:name]
-        %td.text-right{class: balance[:balance] < 0 ? 'text-danger' : 'text-success'}
-          = (balance[:balance] / 100.0).to_s + ' €'
+      %td.text-center
+        Loading...

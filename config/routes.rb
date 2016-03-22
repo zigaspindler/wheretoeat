@@ -24,4 +24,6 @@ Rails.application.routes.draw do
     post :add_user
     put :update_restaurants
   end
+
+  resources :balances, only: :index
 end
