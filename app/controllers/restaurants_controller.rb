@@ -39,16 +39,20 @@ class RestaurantsController < ApplicationController
 
   def update_menus
     restaurant = Restaurant.find(params[:restaurant_id])
-    dates = KamjestCommunicator.new(restaurant).get_menus
-    dates.each do |date|
-      restaurant.menus.where(date: date['date']).destroy_all
-      date['offers'].each do |offer|
-        unless restaurant.kamjest_id == 'selih' && offer['type'] == 'KOSILO'
-          Menu.new(description: offer['text'], price: offer['price'], date: date['date'], restaurant: restaurant, regular: false).save
+    begin
+      dates = KamjestCommunicator.new(restaurant).get_menus
+      dates.each do |date|
+        restaurant.menus.where(date: date['date']).destroy_all
+        date['offers'].each do |offer|
+          unless restaurant.kamjest_id == 'selih' && offer['type'] == 'KOSILO'
+            Menu.new(description: offer['text'], price: offer['price'], date: date['date'], restaurant: restaurant, regular: false).save
+          end
         end
       end
+      render json: {status: 'success'}, status: 200
+    rescue
+      render json: {status: 'failed'}, status: 500
     end
-    render json: {status: 'success'}
   end
 
   private
