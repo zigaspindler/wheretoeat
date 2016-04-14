@@ -29,4 +29,30 @@ class User < ActiveRecord::Base
   def collapsed?
     collapsed == 'true'
   end
+
+  rails_admin do
+    create do
+      field :username
+      field :email
+      field :password
+      field :password_confirmation
+      field :shortreckonings_id do
+        label 'Shortreckonings ID'
+      end
+      field :admin
+      field :group
+    end
+
+    edit do
+      field :username
+      field :email
+      field :password
+      field :password_confirmation
+      field :shortreckonings_id do
+        label 'Shortreckonings ID'
+      end
+      field :admin
+      field :group
+    end
+  end
 end

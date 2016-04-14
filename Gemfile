@@ -18,6 +18,7 @@ gem 'chartkick'
 gem 'httparty'
 gem 'httplog'
 gem 'font-awesome-rails'
+gem 'rails_admin'
 
 group :development, :test do
   gem 'byebug'

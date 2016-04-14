@@ -23,4 +23,22 @@ class Restaurant < ActiveRecord::Base
       vote.user
     end
   end
+
+  rails_admin do
+    create do
+      field :kamjest_id do
+        label 'Kam jest ID'
+      end
+      include_all_fields
+      exclude_fields :votes, :menus
+    end
+
+    edit do
+      field :kamjest_id do
+        label 'Kam jest ID'
+      end
+      include_all_fields
+      exclude_fields :votes, :menus
+    end
+  end
 end
