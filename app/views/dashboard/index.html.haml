@@ -10,8 +10,8 @@
     .col-md-12
       = render partial: 'top_5'
     .col-md-12
+      = render partial: 'comments'
+    .col-md-12
       = render partial: 'balance_table' if current_group.balance_table?
     .col-md-12
       = render partial: 'last_3_days'
-    .col-md-12
-      = render partial: 'comments'
