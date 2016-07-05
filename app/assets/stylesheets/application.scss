@@ -24,6 +24,10 @@
   }
 }
 
+.comment {
+  word-wrap: break-word;
+}
+
 a.collapse-link {
   text-decoration: none;
   &:hover {

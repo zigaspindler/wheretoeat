@@ -1,6 +1,8 @@
 $ ->
   $('[data-toggle="tooltip"]').tooltip()
 
+  scrollCommentsToBottom()
+
   if $('#balance-table').length
     showBalanceData()
 
@@ -20,3 +22,7 @@ showBalanceData = () ->
         $table.append tr
     .fail ->
       $table.html '<tr><td>There was an error</td></tr>'
+
+scrollCommentsToBottom = () ->
+  $comments = $('#comments')
+  $comments.scrollTop($comments[0].scrollHeight)

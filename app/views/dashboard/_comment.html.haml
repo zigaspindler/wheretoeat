@@ -5,5 +5,5 @@
         = comment.user.username
     .col-md-4.text-right
       = comment.created_at.in_time_zone('CET').strftime('%k:%M')
-  %p.list-group-item-text
+  %p.list-group-item-text.comment
     = comment.text

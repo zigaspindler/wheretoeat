@@ -2,7 +2,7 @@
   .panel-heading
     %h3.panel-title
       Comments
-  %ul.list-group
+  %ul.list-group.fixed-height#comments
     = render partial: 'comment', collection: @comments
   .panel-footer
     = form_for @comment, url: {controller: 'comments',action: 'create'} do |f|
