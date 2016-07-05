@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '2.2.3'
+ruby '2.3.1'
 
-gem 'rails', '4.2.4'
+gem 'rails', '5.0.0'
 gem 'pg'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -18,7 +18,9 @@ gem 'chartkick'
 gem 'httparty'
 gem 'httplog'
 gem 'font-awesome-rails'
-gem 'rails_admin'
+gem 'rails_admin', github: 'sferik/rails_admin'
+gem 'rack-pjax', github: 'afcapel/rack-pjax', branch: 'master'
+gem 'remotipart', github: 'mshibuya/remotipart', ref: '3a6acb3'
 
 group :development, :test do
   gem 'byebug'
