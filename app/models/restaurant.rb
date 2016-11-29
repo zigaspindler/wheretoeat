@@ -2,6 +2,8 @@ class Restaurant < ActiveRecord::Base
   has_many :menus
   has_many :votes
 
+  MENU_PARSERS = %w( kamjest )
+
   def grouped_menus
     menus_array = []
     for date in Date.today..4.days.from_now
@@ -24,6 +26,23 @@ class Restaurant < ActiveRecord::Base
     end
   end
 
+  def update_menus
+    return false unless menu_parser.present?
+    begin
+      instance_eval(menu_parser).each do |day|
+        menus.where(date: day[:date]).destroy_all
+        menus << day[:menus].map{ |m| Menu.new(m) }
+      end
+      true
+    rescue
+      false
+    end
+  end
+
+  def menu_parser_enum
+    MENU_PARSERS
+  end
+
   rails_admin do
     create do
       field :kamjest_id do
@@ -40,5 +59,11 @@ class Restaurant < ActiveRecord::Base
       include_all_fields
       exclude_fields :votes, :menus
     end
+  end
+
+  private
+
+  def kamjest
+    KamjestCommunicator.get_menus(kamjest_id)
   end
 end

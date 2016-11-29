@@ -1,6 +1,4 @@
 class RestaurantsController < ApplicationController
-  require 'kamjest_communicator'
-
   before_action :admin?, except: [:index, :show]
 
   def index
@@ -38,19 +36,9 @@ class RestaurantsController < ApplicationController
   end
 
   def update_menus
-    restaurant = Restaurant.find(params[:restaurant_id])
-    begin
-      dates = KamjestCommunicator.new(restaurant).get_menus
-      dates.each do |date|
-        restaurant.menus.where(date: date['date']).destroy_all
-        date['offers'].each do |offer|
-          unless restaurant.kamjest_id == 'selih' && offer['type'] == 'KOSILO'
-            Menu.new(description: offer['text'], price: offer['price'], date: date['date'], restaurant: restaurant, regular: false).save
-          end
-        end
-      end
+    if Restaurant.find(params[:restaurant_id]).update_menus
       render json: {status: 'success'}, status: 200
-    rescue
+    else
       render json: {status: 'failed'}, status: 500
     end
   end
