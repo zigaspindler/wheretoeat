@@ -1,0 +1,1 @@
+require 'kamjest_communicator'
