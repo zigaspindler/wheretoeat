@@ -14,17 +14,18 @@ class KamjestCommunicator
   private
 
   def self.parse_response(response)
-    response['data']['restaurants'].first['dailyOffers'].map do |d|
+    res = response['data']['restaurants'].first
+    res['dailyOffers'].map do |d|
       {
         date: d['date'],
-        menus: parse_menus(d['offers'], d['date']).compact
+        menus: parse_menus(d['offers'], d['date'], res['id']).compact
       }
     end
   end
 
-  def self.parse_menus(menus, date)
+  def self.parse_menus(menus, date, id = nil)
     menus.map do |m|
-      unless m['type'] == 'KOSILO'
+      unless (m['type'] == 'KOSILO' and id == 'selih')
         {
           date: date,
           description: m['text'],
