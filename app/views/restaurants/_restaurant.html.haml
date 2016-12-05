@@ -5,7 +5,7 @@
     = restaurant.default_price
   - if current_user.admin?
     %td.text-right
-      - unless restaurant.kamjest_id.nil? || restaurant.kamjest_id == ''
+      - if restaurant.menu_parser.present?
         = link_to restaurant_update_menus_path(restaurant), class: 'refresh_menus' do
           %i.fa.fa-refresh
       = link_to edit_restaurant_path(restaurant) do

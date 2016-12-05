@@ -2,7 +2,7 @@ class Restaurant < ActiveRecord::Base
   has_many :menus
   has_many :votes
 
-  MENU_PARSERS = %w( kamjest )
+  MENU_PARSERS = %w( kamjest strike )
 
   def grouped_menus
     menus_array = []
@@ -65,5 +65,9 @@ class Restaurant < ActiveRecord::Base
 
   def kamjest
     KamjestCommunicator.get_menus(kamjest_id)
+  end
+
+  def strike
+    StrikeParser.get_menus
   end
 end

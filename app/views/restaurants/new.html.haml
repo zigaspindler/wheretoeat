@@ -13,6 +13,8 @@
       .form-group
         = f.url_field :menu_link, class: 'form-control', placeholder: 'http://menu.link'
       .form-group
-        =f.text_field :kamjest_id, class: 'form-control', placeholder: 'Kam jest id'
+        = f.select :menu_parser, Restaurant::MENU_PARSERS, { include_blank: 'Menu parser' }, { class: 'form-control' }
+      .form-group
+        = f.text_field :kamjest_id, class: 'form-control', placeholder: 'Kam jest id'
       = f.submit "Save", class: 'btn btn-success'
       = link_to 'Back', restaurants_path, class: 'btn btn-danger'

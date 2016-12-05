@@ -22,6 +22,7 @@ gem 'font-awesome-rails'
 gem 'rails_admin', github: 'sferik/rails_admin'
 gem 'rack-pjax', github: 'afcapel/rack-pjax', branch: 'master'
 gem 'remotipart', github: 'mshibuya/remotipart', ref: '3a6acb3'
+gem 'nokogiri'
 
 group :development, :test do
   gem 'byebug'

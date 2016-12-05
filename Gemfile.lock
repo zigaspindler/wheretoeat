@@ -263,6 +263,7 @@ DEPENDENCIES
   httplog
   jbuilder (~> 2.0)
   jquery-rails
+  nokogiri
   pg
   pry-rails
   pry-remote
