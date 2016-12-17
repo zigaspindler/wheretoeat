@@ -9,10 +9,9 @@ GIT
 
 GIT
   remote: git://github.com/mshibuya/remotipart.git
-  revision: 3a6acb36d46d6769faba6bd94ed7f831321f6c6a
-  ref: 3a6acb3
+  revision: cd653ddc43bb09767b8f2802d6e27b3e00ef992f
   specs:
-    remotipart (1.2.1)
+    remotipart (1.3.1)
 
 GIT
   remote: git://github.com/sferik/rails_admin.git
@@ -280,7 +279,7 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 RUBY VERSION
-   ruby 2.3.1p112
+   ruby 2.3.3p222
 
 BUNDLED WITH
-   1.12.5
+   1.13.6
