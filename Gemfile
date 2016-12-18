@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.3.1'
+ruby '2.3.3'
 
 gem 'rails', '5.0.0'
 gem 'pg'
@@ -21,7 +21,7 @@ gem 'httplog'
 gem 'font-awesome-rails'
 gem 'rails_admin', github: 'sferik/rails_admin'
 gem 'rack-pjax', github: 'afcapel/rack-pjax', branch: 'master'
-gem 'remotipart', github: 'mshibuya/remotipart', ref: '3a6acb3'
+gem 'remotipart', github: 'mshibuya/remotipart'
 gem 'nokogiri'
 
 group :development, :test do
