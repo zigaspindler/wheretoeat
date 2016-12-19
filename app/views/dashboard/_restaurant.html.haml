@@ -13,7 +13,10 @@
           - if restaurant.todays_menus.empty?
             %tr
               %td.text-center
-                No data
+                - if restaurant.menu_link.empty?
+                  No data
+                - else
+                  = link_to 'Menus', restaurant.menu_link, target: '_blank'
           - else
             - restaurant.todays_menus.each_with_index do |menu, i|
               %tr{class: ('info' if menu.regular?)}
