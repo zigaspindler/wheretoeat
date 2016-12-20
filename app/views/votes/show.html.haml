@@ -1,0 +1,18 @@
+.panel.panel-default
+  .panel-heading
+    %h3.panel-title
+      Votes
+  %table.table.table-bordered.table-hover.table-condensed
+    %thead
+      %tr
+        %td Username
+        %td Restaurant
+        %td Menu
+    - @votes.each do |vote|
+      %tr{class: ('success' if vote.restaurant_id == @top_restaurant_id)}
+        %td
+          = vote.user.username
+        %td
+          = vote.restaurant.name
+        %td
+          = vote.menu.description unless vote.menu.nil?

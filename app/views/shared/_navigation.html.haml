@@ -6,6 +6,8 @@
       %ul.nav.navbar-nav
         %li{class: ('active' if params[:controller] == 'restaurants')}
           = link_to 'Restaurants', restaurants_path
+        %li{class: ('active' if params[:controller] == 'votes')}
+          = link_to 'Votes', vote_path
         %li{class: ('active' if params[:controller] == 'groups')}
           = link_to current_group.name, group_path
         - if current_user.admin?
