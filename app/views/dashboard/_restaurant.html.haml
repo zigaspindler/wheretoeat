@@ -13,7 +13,7 @@
           - if restaurant.todays_menus.empty?
             %tr
               %td.text-center
-                - if restaurant.menu_link.empty?
+                - if restaurant.menu_link.nil?
                   No data
                 - else
                   = link_to 'Menus', restaurant.menu_link, target: '_blank'
