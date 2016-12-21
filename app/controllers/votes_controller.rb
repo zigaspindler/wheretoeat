@@ -11,7 +11,19 @@ class VotesController < ApplicationController
       GROUP BY restaurants.id
       ORDER BY COUNT(votes) DESC
       LIMIT 1").first['id']
-    @votes = Vote.where(date: date).includes(:restaurant, :user, :menu).order('restaurants.name ASC, users.username ASC')
+    @menus = {}
+    Vote.where(date: date, group: current_group).includes(:restaurant, :user, :menu).order('restaurants.name ASC, users.username ASC').each do |v|
+      key = "#{v.restaurant_id}_#{v.menu_id}"
+      @menus[key] ||= {
+        restaurant_id: v.restaurant_id,
+        restaurant_name: v.restaurant.name,
+        voters: []
+      }
+      if v.menu.present?
+        @menus[key][:text] = v.menu.description
+      end
+      @menus[key][:voters] << v.user.username
+    end
   end
 
   def create
