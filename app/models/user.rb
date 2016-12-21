@@ -19,13 +19,11 @@ class User < ActiveRecord::Base
   end
 
   def voted?(restaurant_id)
-    @today_voted_menus ||= votes.where(date: Date.today)
-    @today_voted_menus.any? { |v| v.restaurant_id == restaurant_id }
+    todays_votes.any? { |v| v.restaurant_id == restaurant_id }
   end
 
   def voted_menu?(menu_id)
-    @today_voted_menus ||= votes.where(date: Date.today)
-    @today_voted_menus.any? { |v| v.menu_id == menu_id }
+    todays_votes.any? { |v| v.menu_id == menu_id }
   end
 
   def initials
@@ -61,4 +59,11 @@ class User < ActiveRecord::Base
       field :group
     end
   end
+
+  private
+
+  def todays_votes
+    @today_voted_menus ||= votes.where(date: Date.today)
+  end
+
 end
