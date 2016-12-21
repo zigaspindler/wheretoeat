@@ -22,6 +22,11 @@ class User < ActiveRecord::Base
     !votes.where(restaurant_id: restaurant_id, date: Date.today).empty?
   end
 
+  def voted_menu?(menu_id)
+    @today_voted_menus ||= votes.where(user: self, date: Date.today)
+    @today_voted_menus.any? { |v| v.menu_id == menu_id }
+  end
+
   def initials
     "#{username[0]}#{username[-1]}".upcase
   end

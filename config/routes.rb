@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   resources :comments, only: :create
 
-  resource :vote, only: [:create, :destroy]
+  resource :vote, only: [:show, :create, :destroy]
 
   resources :settings, only: [:index, :create]
 
