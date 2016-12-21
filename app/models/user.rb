@@ -19,11 +19,12 @@ class User < ActiveRecord::Base
   end
 
   def voted?(restaurant_id)
-    !votes.where(restaurant_id: restaurant_id, date: Date.today).empty?
+    @today_voted_menus ||= votes.where(date: Date.today)
+    @today_voted_menus.any? { |v| v.restaurant_id == restaurant_id }
   end
 
   def voted_menu?(menu_id)
-    @today_voted_menus ||= votes.where(user: self, date: Date.today)
+    @today_voted_menus ||= votes.where(date: Date.today)
     @today_voted_menus.any? { |v| v.menu_id == menu_id }
   end
 

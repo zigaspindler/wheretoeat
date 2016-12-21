@@ -15,7 +15,7 @@ class BalancesController < ApplicationController
           balance: balance['own'].to_i - balance['owes'].to_i
         }
 
-        user[:name] = User.find_by(shortreckonings_id: balance['pid']).try(:username) || balance['pid']
+        user[:name] = User.select(:username).find_by_shortreckonings_id(balance['pid']).try(:username) || balance['pid']
         user
       }[0...-1].sort_by { |u| u[:balance] }
     rescue
