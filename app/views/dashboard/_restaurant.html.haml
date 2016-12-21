@@ -22,12 +22,13 @@
               %tr{class: ('info' if menu.regular?)}
                 %td.col-md-1.text-left= i + 1
                 %td.col-md-9.text-left= menu.description
-                %td.col-md-1.text-right= "#{menu.price}€"
+                %td.col-md-1.text-right
+                  = "#{menu.price}€" if menu.price.present?
                 %td.col-md-1.text-right
                   - unless current_user.voted_menu?(menu.id)
-                    = link_to 'Vote', vote_path(menu_id: menu), method: :post, class: 'btn btn-success btn-xs'
+                    = link_to 'V', vote_path(menu_id: menu), method: :post, class: 'btn btn-success btn-xs', title: 'Vote'
                   - else
-                    = link_to 'Unvote', vote_path, method: :delete, class: 'btn btn-danger btn-xs', data: {confirm: 'Are you sure?'}
+                    = link_to 'U', vote_path, method: :delete, class: 'btn btn-danger btn-xs',  title: 'Unvote', data: {confirm: 'Are you sure?'}
 
     .panel-footer
       .row
