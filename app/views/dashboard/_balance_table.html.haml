@@ -1,7 +1,7 @@
 .panel.panel-default
   .panel-heading
     %h3.panel-title
-      Balance table
+      = link_to 'Balance table', "https://www.shortreckonings.com/sr##{current_group.sr_id}", target: '_blank'
   %table.table.table-hover#balance-table
     %tr
       %td.text-center
