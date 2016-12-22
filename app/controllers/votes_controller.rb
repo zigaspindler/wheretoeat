@@ -10,7 +10,9 @@ class VotesController < ApplicationController
       AND votes.group_id = #{current_group.id}
       GROUP BY restaurants.id
       ORDER BY COUNT(votes) DESC
-      LIMIT 1").first['id']
+      LIMIT 1").try(:first).try do |r|
+        r['id']
+      end
     @menus = {}
     Vote.where(date: date, group: current_group).includes(:restaurant, :user, :menu).order('restaurants.name ASC, users.username ASC').each do |v|
       key = "#{v.restaurant_id}_#{v.menu_id}"
