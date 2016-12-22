@@ -5,14 +5,15 @@
   %table.table.table-bordered.table-hover.table-condensed
     %thead
       %tr
-        %td Username
         %td Restaurant
         %td Menu
-    - @votes.each do |vote|
-      %tr{class: ('success' if vote.restaurant_id == @top_restaurant_id)}
+        %td Username
+    - @menus.each do |_, menu|
+      %tr{class: ('success' if menu[:restaurant_id] == @top_restaurant_id)}
         %td
-          = vote.user.username
+          = menu[:restaurant_name]
         %td
-          = vote.restaurant.name
+          - if menu[:text].present?
+            = "#{menu[:voters].length} x #{menu[:text]}"
         %td
-          = vote.menu.description unless vote.menu.nil?
+          = menu[:voters].join(', ')
