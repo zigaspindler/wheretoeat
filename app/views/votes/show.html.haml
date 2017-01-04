@@ -1,4 +1,4 @@
-.panel.panel-default
+.panel.panel-default.votes
   .panel-heading
     %h3.panel-title
       Votes
@@ -9,9 +9,12 @@
         %td Menu
         %td Username
     - @menus.each do |_, menu|
-      %tr{class: ('success' if menu[:restaurant_id] == @top_restaurant_id)}
+      %tr{class: ('success' if menu[:restaurant].id == @top_restaurant_id)}
         %td
-          = menu[:restaurant_name]
+          = link_to menu[:restaurant].name, restaurant_path(menu[:restaurant])
+          - unless menu[:restaurant].telephone_number.nil?
+            %span.phone
+              = link_to "(#{menu[:restaurant].telephone_number})", "tel:#{menu[:restaurant].telephone_number}"
         %td
           - if menu[:text].present?
             = "#{menu[:voters].length} x #{menu[:text]}"

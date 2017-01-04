@@ -17,8 +17,7 @@ class VotesController < ApplicationController
     Vote.where(date: date, group: current_group).includes(:restaurant, :user, :menu).order('restaurants.name ASC, users.username ASC').each do |v|
       key = "#{v.restaurant_id}_#{v.menu_id}"
       @menus[key] ||= {
-        restaurant_id: v.restaurant_id,
-        restaurant_name: v.restaurant.name,
+        restaurant: v.restaurant,
         voters: []
       }
       if v.menu.present?

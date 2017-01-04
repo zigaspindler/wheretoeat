@@ -44,6 +44,15 @@ a.collapse-link {
     content:"\e080";
 }
 
+.votes {
+  a {
+    color: inherit;
+  }
+  .phone {
+    font-size: 12px;
+  }
+}
+
 .fork-me {
   -ms-transform: rotate(-25deg);
   -webkit-transform: rotate(-25deg);
