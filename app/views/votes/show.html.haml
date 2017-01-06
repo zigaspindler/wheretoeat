@@ -12,7 +12,7 @@
       %tr{class: ('success' if menu[:restaurant].id == @top_restaurant_id)}
         %td
           = link_to menu[:restaurant].name, restaurant_path(menu[:restaurant])
-          - unless menu[:restaurant].telephone_number.nil? or menu[:restaurant].telephone_number.empty?
+          - if menu[:restaurant].telephone_number.present?
             %span.phone
               = link_to "(#{menu[:restaurant].telephone_number})", "tel:#{menu[:restaurant].telephone_number}"
         %td
