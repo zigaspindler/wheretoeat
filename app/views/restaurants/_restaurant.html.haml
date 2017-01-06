@@ -3,11 +3,11 @@
     = link_to restaurant.name, restaurant_path(restaurant)
   %td.text-right
     = restaurant.default_price
-  - if current_user.admin?
-    %td.text-right
-      - if restaurant.menu_parser.present?
-        = link_to restaurant_update_menus_path(restaurant), class: 'refresh_menus' do
-          %i.fa.fa-refresh
+  %td.text-right
+    - if restaurant.menu_parser.present?
+      = link_to restaurant_update_menus_path(restaurant), class: 'refresh_menus' do
+        %i.fa.fa-refresh
+    - if current_user.admin?
       = link_to edit_restaurant_path(restaurant) do
         %span.glyphicon.glyphicon-pencil
       = link_to restaurant_path(restaurant), method: :delete, data: {confirm: 'Are you sure?'} do
