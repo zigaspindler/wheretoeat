@@ -1,5 +1,8 @@
 %h3
   = @restaurant.name
+- if @restaurant.menu_parser.present?
+  = link_to restaurant_update_menus_path(@restaurant), class: 'refresh_menus' do
+    %i.fa.fa-refresh
 = link_to 'Menus', @restaurant.menu_link, target: '_blank' unless @restaurant.menu_link.nil?
 - @restaurant.grouped_menus.each_slice(4) do |menus|
   .row
