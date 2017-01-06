@@ -1,9 +1,13 @@
 %h3
   = @restaurant.name
 - if @restaurant.menu_parser.present?
-  = link_to restaurant_update_menus_path(@restaurant), class: 'refresh_menus' do
+  = link_to restaurant_update_menus_path(@restaurant), class: 'refresh_menus', title: 'Refresh menus' do
     %i.fa.fa-refresh
+  |
 = link_to 'Menus', @restaurant.menu_link, target: '_blank' unless @restaurant.menu_link.nil?
+- if @restaurant.kamjest_id.present?
+  |
+  = link_to 'Data', "http://kam-jest.herokuapp.com/graphql?query=%7B%0A%20%20restaurants(id%3A%22#{@restaurant.kamjest_id}%22)%7B%0A%20%20%20%20name%0A%20%20%20%20dailyOffers(date%3A%22#{Date.today}%22)%7B%0A%20%20%20%20%20%20date%0A%20%20%20%20%20%20offers%20%7B%0A%20%20%20%20%20%20%20%20text%0A%20%20%20%20%20%20%20%20type%0A%20%20%20%20%20%20%20%20price%0A%20%20%20%20%20%20%20%20allergens%0A%20%20%20%20%20%20%7D%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D", target: '_blank' unless @restaurant.menu_link.nil?
 - @restaurant.grouped_menus.each_slice(4) do |menus|
   .row
     - menus.each do |menu_object|
