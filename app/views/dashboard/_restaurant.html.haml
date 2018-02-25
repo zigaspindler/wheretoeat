@@ -28,17 +28,16 @@
                   = "#{menu.price}€" if menu.price.present?
                 %td.col-md-1.text-right
                   - unless current_user.voted_menu?(menu.id)
-                    = link_to 'V', vote_path(menu_id: menu), method: :post, class: 'btn btn-success btn-xs', title: 'Vote'
+                    = link_to 'V', votes_path(menu_id: menu), method: :post, class: 'btn btn-success btn-xs', title: 'Vote'
                   - else
-                    = link_to 'U', vote_path, method: :delete, class: 'btn btn-danger btn-xs',  title: 'Unvote', data: {confirm: 'Are you sure?'}
-
+                    = link_to 'U', votes_path, method: :delete, class: 'btn btn-danger btn-xs',  title: 'Unvote', data: {confirm: 'Are you sure?'}
     .panel-footer
       .row
         .col-md-2
           - unless current_user.voted?(restaurant.id)
-            = link_to 'Vote', vote_path(restaurant_id: restaurant), method: :post, class: 'btn btn-success'
+            = link_to 'Vote', votes_path(restaurant_id: restaurant), method: :post, class: 'btn btn-success'
           - else
-            = link_to 'Unvote', vote_path, method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure?'}
+            = link_to 'Unvote', votes_path, method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure?'}
         .col-md-10.text-right
           %h5
             No. of votes
