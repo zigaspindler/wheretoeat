@@ -5,7 +5,7 @@
         %a.collapse-link{role: 'button', data: {toggle: 'collapse'}, href: "#restaurant_#{restaurant.id}", aria: {expanded: !current_user.collapsed?, controls: "#restaurant_#{restaurant.id}"}, class: ('collapsed' if current_user.collapsed?)}
         = link_to restaurant.name, restaurant_path(restaurant)
         = link_to '<i class="glyphicon glyphicon-list-alt"></i>'.html_safe, restaurant.menu_link, target: '_blank' if restaurant.menu_link.present?
-        = link_to '<i class="glyphicon glyphicon-plus"></i>'.html_safe, new_restaurant_menu_path(restaurant, date: Date.today)
+        = link_to '<i class="glyphicon glyphicon-plus"></i>'.html_safe, new_restaurant_menu_path(restaurant)
         - unless restaurant.telephone_number.nil?
           %span.phone
             = link_to restaurant.telephone_number, "tel:#{restaurant.telephone_number}"
