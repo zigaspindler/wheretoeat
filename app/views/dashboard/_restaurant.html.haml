@@ -33,12 +33,17 @@
                     = link_to 'U', votes_path, method: :delete, class: 'btn btn-danger btn-xs',  title: 'Unvote', data: {confirm: 'Are you sure?'}
     .panel-footer
       .row
-        .col-md-2
+        .col-md-6
           - unless current_user.voted?(restaurant.id)
             = link_to 'Vote', votes_path(restaurant_id: restaurant), method: :post, class: 'btn btn-success'
           - else
             = link_to 'Unvote', votes_path, method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure?'}
-        .col-md-10.text-right
+            - if current_user.my_vote.comment.present?
+              = link_to '<i class="glyphicon glyphicon-comment"></i>'.html_safe, edit_vote_comment_path(vote_id: current_user.my_vote.comment.vote_id, id: current_user.my_vote.comment.id), class: 'btn btn-success'
+            - else
+              = link_to '<i class="glyphicon glyphicon-comment"></i>'.html_safe, new_vote_comment_path(current_user.my_vote), class: 'btn btn-success'              
+
+        .col-md-6.text-right
           %h5
             No. of votes
             %span.badge
