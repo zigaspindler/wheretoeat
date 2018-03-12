@@ -4,8 +4,11 @@
       %h3.panel-title
         %a.collapse-link{role: 'button', data: {toggle: 'collapse'}, href: "#restaurant_#{restaurant.id}", aria: {expanded: !current_user.collapsed?, controls: "#restaurant_#{restaurant.id}"}, class: ('collapsed' if current_user.collapsed?)}
         = link_to restaurant.name, restaurant_path(restaurant)
-        = link_to '<i class="glyphicon glyphicon-list-alt"></i>'.html_safe, restaurant.menu_link, target: '_blank' if restaurant.menu_link.present?
-        = link_to '<i class="glyphicon glyphicon-plus"></i>'.html_safe, new_restaurant_menu_path(restaurant)
+        - if restaurant.menu_link.present?
+          = link_to restaurant.menu_link, target: '_blank' do
+            %i.glyphicon.glyphicon-list-alt
+        = link_to new_restaurant_menu_path(restaurant) do
+          %i.glyphicon.glyphicon-plus
         - unless restaurant.telephone_number.nil?
           %span.phone
             = link_to restaurant.telephone_number, "tel:#{restaurant.telephone_number}"
@@ -16,7 +19,9 @@
             %tr
               %td.text-center
                 - if restaurant.menu_link.present?
-                  = link_to '<i class="glyphicon glyphicon-list-alt"></i> Menu'.html_safe, restaurant.menu_link, target: '_blank'
+                  = link_to restaurant.menu_link, target: '_blank' do
+                    %i.glyphicon.glyphicon-list-alt
+                    Menu
                 - else
                   No data
           - else
@@ -39,9 +44,11 @@
           - else
             = link_to 'Unvote', votes_path, method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure?'}
             - if current_user.my_vote.comment.present?
-              = link_to '<i class="glyphicon glyphicon-comment"></i>'.html_safe, edit_vote_comment_path(vote_id: current_user.my_vote.comment.vote_id, id: current_user.my_vote.comment.id), class: 'btn btn-success'
+              = link_to edit_vote_comment_path(vote_id: current_user.my_vote.comment.vote_id, id: current_user.my_vote.comment.id), class: 'btn btn-success' do
+                %i.glyphicon.glyphicon-comment
             - else
-              = link_to '<i class="glyphicon glyphicon-comment"></i>'.html_safe, new_vote_comment_path(current_user.my_vote), class: 'btn btn-success'              
+              = link_to new_vote_comment_path(current_user.my_vote), class: 'btn btn-success' do
+                %i.glyphicon.glyphicon-comment
 
         .col-md-6.text-right
           %h5
