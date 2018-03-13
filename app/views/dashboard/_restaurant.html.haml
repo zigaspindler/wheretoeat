@@ -4,6 +4,11 @@
       %h3.panel-title
         %a.collapse-link{role: 'button', data: {toggle: 'collapse'}, href: "#restaurant_#{restaurant.id}", aria: {expanded: !current_user.collapsed?, controls: "#restaurant_#{restaurant.id}"}, class: ('collapsed' if current_user.collapsed?)}
         = link_to restaurant.name, restaurant_path(restaurant)
+        - if restaurant.menu_link.present?
+          = link_to restaurant.menu_link, target: '_blank' do
+            %i.glyphicon.glyphicon-list-alt
+        = link_to new_restaurant_menu_path(restaurant) do
+          %i.glyphicon.glyphicon-plus
         - unless restaurant.telephone_number.nil?
           %span.phone
             = link_to restaurant.telephone_number, "tel:#{restaurant.telephone_number}"
@@ -13,10 +18,12 @@
           - if restaurant.todays_menus.empty?
             %tr
               %td.text-center
-                - unless restaurant.menu_link.present?
-                  No data
+                - if restaurant.menu_link.present?
+                  = link_to restaurant.menu_link, target: '_blank' do
+                    %i.glyphicon.glyphicon-list-alt
+                    Menu
                 - else
-                  = link_to 'Menus', restaurant.menu_link, target: '_blank'
+                  No data
           - else
             - restaurant.todays_menus.each_with_index do |menu, i|
               %tr{class: ('info' if menu.regular?)}
@@ -26,18 +33,24 @@
                   = "#{menu.price}€" if menu.price.present?
                 %td.col-md-1.text-right
                   - unless current_user.voted_menu?(menu.id)
-                    = link_to 'V', vote_path(menu_id: menu), method: :post, class: 'btn btn-success btn-xs', title: 'Vote'
+                    = link_to 'V', votes_path(menu_id: menu), method: :post, class: 'btn btn-success btn-xs', title: 'Vote'
                   - else
-                    = link_to 'U', vote_path, method: :delete, class: 'btn btn-danger btn-xs',  title: 'Unvote', data: {confirm: 'Are you sure?'}
-
+                    = link_to 'U', votes_path, method: :delete, class: 'btn btn-danger btn-xs',  title: 'Unvote', data: {confirm: 'Are you sure?'}
     .panel-footer
       .row
-        .col-md-2
+        .col-md-6
           - unless current_user.voted?(restaurant.id)
-            = link_to 'Vote', vote_path(restaurant_id: restaurant), method: :post, class: 'btn btn-success'
+            = link_to 'Vote', votes_path(restaurant_id: restaurant), method: :post, class: 'btn btn-success'
           - else
-            = link_to 'Unvote', vote_path, method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure?'}
-        .col-md-10.text-right
+            = link_to 'Unvote', votes_path, method: :delete, class: 'btn btn-danger', data: {confirm: 'Are you sure?'}
+            - if current_user.my_vote.comment.present?
+              = link_to edit_vote_comment_path(vote_id: current_user.my_vote.comment.vote_id, id: current_user.my_vote.comment.id), class: 'btn btn-success' do
+                %i.glyphicon.glyphicon-comment
+            - else
+              = link_to new_vote_comment_path(current_user.my_vote), class: 'btn btn-success' do
+                %i.glyphicon.glyphicon-comment
+
+        .col-md-6.text-right
           %h5
             No. of votes
             %span.badge

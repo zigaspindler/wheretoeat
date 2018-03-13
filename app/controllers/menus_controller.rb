@@ -3,7 +3,7 @@ class MenusController < ApplicationController
     @menu = Menu.new
     @menu.restaurant = Restaurant.find params[:restaurant_id]
     @menu.price = @menu.restaurant.default_price
-    @menu.date = params[:date] unless params[:date].nil?
+    @menu.date = params[:date].nil? ? Date.today : params[:date]
   end
 
   def edit

@@ -2,7 +2,7 @@ class DashboardController < ApplicationController
   def index
     Restaurant.connection.execute "select setseed(#{seed})"
     @restaurants = current_group.restaurants.order 'random()'
-    @comments = Comment.where("created_at >= ? and group_id = ?", Time.zone.now.beginning_of_day, current_group.id).order(created_at: :asc)
+    @comments = Comment.where("created_at >= ? and group_id = ? and vote_id IS NULL", Time.zone.now.beginning_of_day, current_group.id).order(created_at: :asc)
     @comment = Comment.new
     @top_5 = top_for_date Date.today
     @last_3_days = last_3_days

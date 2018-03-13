@@ -8,6 +8,7 @@
         %td Restaurant
         %td Menu
         %td Username
+        %td Comments
     - @menus.each do |_, menu|
       %tr{class: ('success' if menu[:restaurant].id == @top_restaurant_id)}
         %td
@@ -20,3 +21,6 @@
             = "#{menu[:voters].length} x #{menu[:text]}"
         %td
           = menu[:voters].join(', ')
+        %td
+          - menu[:comments].each do |comment|
+            %div #{comment.user.username}: #{comment.text}

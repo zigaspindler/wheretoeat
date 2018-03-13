@@ -1,0 +1,13 @@
+.row
+  .col-md-4.col-md-offset-4
+    = form_for @comment, url: {action: 'create'} do |f|
+      %div
+        - if @comment.vote.menu.present?
+          %p Komentar za #{@comment.vote.menu.description}
+        - else
+          %p Komentar za #{@comment.vote.restaurant.name}
+      .form-group
+        = f.text_field :text, class: 'form-control', placeholder: 'brez gobic...'
+      = f.hidden_field :vote_id
+      = f.submit "Save", class: 'btn btn-success'
+      = link_to 'Back', root_path, class: 'btn btn-danger'

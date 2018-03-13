@@ -18,6 +18,10 @@ class User < ActiveRecord::Base
     false
   end
 
+  def my_vote
+    todays_votes.detect { |v| v.user == self }
+  end
+
   def voted?(restaurant_id)
     todays_votes.any? { |v| v.restaurant_id == restaurant_id }
   end
