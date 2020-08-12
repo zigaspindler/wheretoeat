@@ -1,6 +1,7 @@
 class Restaurant < ActiveRecord::Base
   has_many :menus
   has_many :votes
+  has_many :images
 
   MENU_PARSERS = %w( kamjest strike )
 
@@ -14,6 +15,10 @@ class Restaurant < ActiveRecord::Base
 
   def todays_menus
     @todays_menus ||= menus.where('date=? OR regular=true', Date.today).order(:regular)
+  end
+
+  def todays_images
+    @todays_images ||= images.where date: Date.today
   end
 
   def today_votes_number(user)
@@ -32,6 +37,8 @@ class Restaurant < ActiveRecord::Base
       instance_eval(menu_parser).each do |day|
         menus.where(date: day[:date]).destroy_all
         menus << day[:menus].map{ |m| Menu.new(m) }
+        images.where(date: day[:date]).destroy_all
+        images << day[:images].map{ |i| Image.new(i) }
       end
       true
     rescue

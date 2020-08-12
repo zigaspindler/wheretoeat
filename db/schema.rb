@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180224230753) do
+ActiveRecord::Schema.define(version: 20200812190957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,15 @@ ActiveRecord::Schema.define(version: 20180224230753) do
     t.integer "restaurant_id", null: false
     t.index ["group_id", "restaurant_id"], name: "index_groups_restaurants_on_group_id_and_restaurant_id", using: :btree
     t.index ["restaurant_id", "group_id"], name: "index_groups_restaurants_on_restaurant_id_and_group_id", using: :btree
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string   "url",           null: false
+    t.date     "date",          null: false
+    t.integer  "restaurant_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["restaurant_id"], name: "index_images_on_restaurant_id", using: :btree
   end
 
   create_table "menus", force: :cascade do |t|
@@ -105,6 +114,7 @@ ActiveRecord::Schema.define(version: 20180224230753) do
   add_foreign_key "comments", "groups"
   add_foreign_key "comments", "users"
   add_foreign_key "comments", "votes"
+  add_foreign_key "images", "restaurants"
   add_foreign_key "menus", "restaurants"
   add_foreign_key "users", "groups"
   add_foreign_key "votes", "groups"
