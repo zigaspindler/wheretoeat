@@ -4,6 +4,6 @@ class Vote < ActiveRecord::Base
   belongs_to :menu
   belongs_to :group
 
-  has_one :comment, dependent: :delete
+  has_one :comment, dependent: :destroy
 
 end

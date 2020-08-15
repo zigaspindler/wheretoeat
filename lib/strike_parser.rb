@@ -32,7 +32,7 @@ class StrikeParser
         }
       end
 
-      menus << { date: menu_date, menus: offers }
+      menus << { date: menu_date, images: [], menus: offers }
     end
 
     menus

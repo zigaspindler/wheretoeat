@@ -1,16 +1,16 @@
 source 'https://rubygems.org'
 
-ruby '2.3.3'
+ruby '2.7.1'
 
-gem 'rails', '5.0.0'
-gem 'pg'
+gem 'rails', '5.0.1'
+gem 'pg', '~> 0.18'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
-gem 'puma'
+gem 'puma', '3.8.0'
 
 gem 'devise'
 gem 'bootstrap-sass', '~> 3.3.5'
@@ -19,9 +19,9 @@ gem 'chartkick'
 gem 'httparty'
 gem 'httplog'
 gem 'font-awesome-rails'
-gem 'rails_admin', github: 'sferik/rails_admin'
-gem 'rack-pjax', github: 'afcapel/rack-pjax', branch: 'master'
-gem 'remotipart', github: 'mshibuya/remotipart'
+gem 'rails_admin', git: 'https://github.com/sferik/rails_admin.git'
+gem 'rack-pjax', git: 'https://github.com/afcapel/rack-pjax.git'
+gem 'remotipart', git: 'https://github.com/mshibuya/remotipart.git'
 gem 'nokogiri'
 
 group :development, :test do

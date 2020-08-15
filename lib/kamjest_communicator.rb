@@ -5,20 +5,21 @@ class KamjestCommunicator
   def self.get_menus(id)
     response = self.post('/graphql',
       body: {
-        query: "{restaurants(id:\"#{id}\"){id dailyOffers{date offers{text type price}}}}"
+        query: "{restaurants(id:\"#{id}\"){dailyOffers{date offersImages offers{text type price}}}}"
       }
     )
-    parse_response response
+    parse_response id, response
   end
 
   private
 
-  def self.parse_response(response)
+  def self.parse_response(kamjest_id, response)
     res = response['data']['restaurants'].first
     res['dailyOffers'].map do |d|
       {
         date: d['date'],
-        menus: parse_menus(d['offers'], d['date'], res['id']).compact
+        images: parse_images(d['offersImages'], d['date']),
+        menus: parse_menus(d['offers'], d['date'], kamjest_id).compact
       }
     end
   end
@@ -33,6 +34,15 @@ class KamjestCommunicator
           regular: false
         }
       end
+    end
+  end
+
+  def self.parse_images(images, date)
+    images.map do |url|
+      {
+          url: url,
+          date: date
+      }
     end
   end
 end

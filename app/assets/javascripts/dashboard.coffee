@@ -16,7 +16,7 @@ showBalanceData = () ->
         tr = $('<tr />')
         tr.append $('<td />').text(balance.name)
 
-        td = $('<td />').addClass('text-right').text((balance.balance / 100.0) + ' €')
+        td = $('<td />').addClass('text-right').text(balance.balance + ' €')
         td.addClass if balance.balance < 0 then 'text-danger' else 'text-success'
         tr.append td
 
