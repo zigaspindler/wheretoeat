@@ -180,7 +180,7 @@ GEM
     pry-remote (0.1.8)
       pry (~> 0.9)
       slop (~> 3.0)
-    puma (3.8.0)
+    puma (3.12.6)
     rack (2.2.3)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -293,7 +293,7 @@ DEPENDENCIES
   pg (~> 0.18)
   pry-rails
   pry-remote
-  puma (= 3.8.0)
+  puma (= 3.12.6)
   rack-pjax!
   rails (= 5.0.1)
   rails_12factor
