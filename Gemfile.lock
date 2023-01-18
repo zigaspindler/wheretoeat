@@ -181,7 +181,7 @@ GEM
       pry (~> 0.9)
       slop (~> 3.0)
     puma (3.8.0)
-    rack (2.2.3)
+    rack (2.2.6.2)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.0.1)
